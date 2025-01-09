@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -25,11 +24,16 @@ public class Etudiant {
     String nomEtudiant;
     String prenomEtudiant;
     long cinEtudiant;
-    Date dateNaissance;
+    String dateNaissance;
 
     @ManyToMany(mappedBy = "etudiants")
     Set<Reservation> reservations;
 
+    public Etudiant(long l, String jane, String smith, int i, String aa) {
+    }
+
+    public Etudiant(long l, String john, String doe, String number) {
+    }
 }
 
 

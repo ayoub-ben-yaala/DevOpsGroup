@@ -58,7 +58,12 @@
 
 
     </dependencies>
-
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <url>http://192.168.206.128:8081/repository/maven-releases/</url>
+        </repository>
+    </distributionManagement>
     <build>
         <plugins>
             <plugin>
@@ -73,12 +78,18 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.12</version>
+            </plugin>
             <!-- SonarQube Plugin -->
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.9.0.2155</version> <!-- Choisissez la version la plus récente -->
             </plugin>
+
         </plugins>
     </build>
 
