@@ -73,6 +73,12 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!-- SonarQube Plugin -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.0.2155</version> <!-- Choisissez la version la plus récente -->
+            </plugin>
         </plugins>
     </build>
 
