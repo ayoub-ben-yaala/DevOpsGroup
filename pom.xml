@@ -77,14 +77,16 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.12</version>
                 <executions>
-                    <!-- Prépare l'agent JaCoCo avant l'exécution des tests -->
                     <execution>
+                        <id>default-prepare</id>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-                    <!-- Génère le rapport après les tests -->
                     <execution>
+                        <id>default-report</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
