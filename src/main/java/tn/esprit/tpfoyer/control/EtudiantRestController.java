@@ -1,70 +1,72 @@
 package tn.esprit.tpfoyer.control;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.tpfoyer.entity.Etudiant;
 import tn.esprit.tpfoyer.service.IEtudiantService;
 
 import java.util.List;
 
-
 @RestController
 @AllArgsConstructor
 @RequestMapping("/etudiant")
 public class EtudiantRestController {
 
-    IEtudiantService etudiantService;
+    private final IEtudiantService etudiantService; // Injection par constructeur
 
-
+    /**
+     * Récupère tous les étudiants.
+     */
     @GetMapping("/retrieve-all-etudiants")
-    public List<Etudiant> getEtudiants() {
+    public ResponseEntity<List<Etudiant>> getEtudiants() {
         List<Etudiant> listEtudiants = etudiantService.retrieveAllEtudiants();
-        return listEtudiants;
+        return ResponseEntity.ok().body(listEtudiants);  // Retour avec code HTTP 200
     }
 
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * Récupère un étudiant par son CIN.
+     */
     @GetMapping("/retrieve-etudiant-cin/{cin}")
-    public Etudiant retrieveEtudiantParCin(@PathVariable("cin") Long cin) {
+    public ResponseEntity<Etudiant> retrieveEtudiantParCin(@PathVariable("cin") Long cin) {
         Etudiant etudiant = etudiantService.recupererEtudiantParCin(cin);
-        return etudiant;
+        return etudiant != null ? ResponseEntity.ok(etudiant) : ResponseEntity.notFound().build();  // Retour avec code HTTP 200 ou 404 si non trouvé
     }
 
-
+    /**
+     * Récupère un étudiant par son ID.
+     */
     @GetMapping("/retrieve-etudiant/{etudiant-id}")
-    public Etudiant retrieveEtudiant(@PathVariable("etudiant-id") Long chId) {
-        Etudiant etudiant = etudiantService.retrieveEtudiant(chId);
-        return etudiant;
+    public ResponseEntity<Etudiant> retrieveEtudiant(@PathVariable("etudiant-id") Long etudiantId) {
+        Etudiant etudiant = etudiantService.retrieveEtudiant(etudiantId);
+        return etudiant != null ? ResponseEntity.ok(etudiant) : ResponseEntity.notFound().build();  // Retour avec code HTTP 200 ou 404 si non trouvé
     }
 
-    // http://localhost:8089/tpfoyer/etudiant/add-etudiant
+    /**
+     * Ajoute un nouvel étudiant.
+     */
     @PostMapping("/add-etudiant")
-    public Etudiant addEtudiant(@RequestBody Etudiant c) {
-        Etudiant etudiant = etudiantService.addEtudiant(c);
-        return etudiant;
+    public ResponseEntity<Etudiant> addEtudiant(@RequestBody Etudiant etudiant) {
+        Etudiant savedEtudiant = etudiantService.addEtudiant(etudiant);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedEtudiant);  // Retour avec code HTTP 201 pour une création réussie
     }
 
-    // http://localhost:8089/tpfoyer/etudiant/remove-etudiant/{etudiant-id}
+    /**
+     * Supprime un étudiant par son ID.
+     */
     @DeleteMapping("/remove-etudiant/{etudiant-id}")
-    public void removeEtudiant(@PathVariable("etudiant-id") Long chId) {
-        etudiantService.removeEtudiant(chId);
+    public ResponseEntity<Void> removeEtudiant(@PathVariable("etudiant-id") Long etudiantId) {
+        etudiantService.removeEtudiant(etudiantId);
+        return ResponseEntity.ok().build();  // Retour avec code HTTP 200
     }
 
-    // http://localhost:8089/tpfoyer/etudiant/modify-etudiant
+    /**
+     * Modifie un étudiant existant.
+     */
     @PutMapping("/modify-etudiant")
-    public Etudiant modifyEtudiant(@RequestBody Etudiant c) {
-        Etudiant etudiant = etudiantService.modifyEtudiant(c);
-        return etudiant;
+    public ResponseEntity<Etudiant> modifyEtudiant(@RequestBody Etudiant etudiant) {
+        Etudiant updatedEtudiant = etudiantService.modifyEtudiant(etudiant);
+        return updatedEtudiant != null ? ResponseEntity.ok(updatedEtudiant) : ResponseEntity.notFound().build();  // Retour avec code HTTP 200 ou 404 si non trouvé
     }
-
-
 }
