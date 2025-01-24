@@ -15,7 +15,7 @@ services:
   app:
     depends_on:
       - mysqldb
-    image: ghassendallagi/projetfoyergd:0.1
+    image: ghassendallagi/tpfoyer:0.1
     restart: on-failure
     #env_file: ./.env
     ports:
