@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 
 services:
   mysqldb:
@@ -12,7 +12,6 @@ services:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
     volumes:
       - db:/var/lib/mysql
-
   app:
     depends_on:
       - mysqldb
@@ -35,4 +34,4 @@ services:
     tty: true
 
 volumes:
-  db:
+  db :
