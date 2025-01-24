@@ -9,18 +9,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import tn.esprit.tpfoyer.TpFoyerApplication;
-import tn.esprit.tpfoyer.control.EtudiantRestController;
+import tn.esprit.tpfoyer.control.ChambreRestController;
 import tn.esprit.tpfoyer.service.IChambreService;
-
-
-import java.util.Arrays;
-
-
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(EtudiantRestController.class)
+@WebMvcTest(ChambreRestController.class)
 @ContextConfiguration(classes = TpFoyerApplication.class)
 public class ChambreRestControllerTest {
 
