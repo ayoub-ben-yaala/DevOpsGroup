@@ -5,21 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.ContextConfiguration;
-import tn.esprit.tpfoyer.TpFoyerApplication;
-import tn.esprit.tpfoyer.control.EtudiantRestController;
 import tn.esprit.tpfoyer.entity.Etudiant;
 import tn.esprit.tpfoyer.repository.EtudiantRepository;
 import tn.esprit.tpfoyer.service.EtudiantServiceImpl;
 
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-@WebMvcTest(EtudiantServiceImplTest.class)
-@ContextConfiguration(classes = TpFoyerApplication.class)
 
 public class EtudiantServiceImplTest {
 
@@ -48,6 +38,4 @@ public class EtudiantServiceImplTest {
         // Assert
         verify(etudiantRepository, times(1)).deleteById(etudiantId); // Vérifier que deleteById est bien appelé une fois
     }
-
 }
-
